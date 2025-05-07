@@ -7,8 +7,6 @@ import model.entities.Department;
 import model.entities.Seller;
 
 
-import java.sql.*;
-import java.util.Date;
 import java.util.List;
 
 public class Program {
