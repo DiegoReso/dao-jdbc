@@ -6,7 +6,6 @@ import model.dao.SellerDao;
 import model.entities.Department;
 import model.entities.Seller;
 
-import javax.swing.plaf.SliderUI;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,8 +65,7 @@ public class SellerDaoJDBC implements SellerDao {
         try {
             st = conn.prepareStatement("UPDATE seller " +
                             "SET name = ?, email = ?, birthdate = ?, base_salary = ?, departmentId = ? " +
-                            "WHERE id = ? ",
-                    Statement.RETURN_GENERATED_KEYS);
+                            "WHERE id = ? ");
             st.setString(1, seller.getName());
             st.setString(2,seller.getEmail());
             st.setDate(3, new java.sql.Date(seller.getBirthDate().getTime()));
@@ -88,7 +86,17 @@ public class SellerDaoJDBC implements SellerDao {
 
     @Override
     public void deleteById(Integer id) {
+        PreparedStatement st = null;
 
+        try {
+            st = conn.prepareStatement("DELETE FROM seller WHERE id = ?");
+            st.setInt(1,id);
+            st.executeUpdate();
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }finally {
+            DB.closeStatement(st);
+        }
     }
 
     @Override

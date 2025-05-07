@@ -38,17 +38,21 @@ public class Program {
 
         System.out.println();
         System.out.println("=== TEST 4: seller insert ===");
-        Seller newSeller =new Seller(null, "Greg", "greg@email.com", new Date(), 4000.0, newDepartment);
-        sellerDao.insert(newSeller);
-        System.out.println("Adicionado novo id : " + newSeller.getId());
+//        Seller newSeller =new Seller(null, "Greg", "greg@email.com", new Date(), 4000.0, newDepartment);
+//        sellerDao.insert(newSeller);
+//        System.out.println("Adicionado novo id : " + newSeller.getId());
 
 
         System.out.println();
         System.out.println("=== TEST 5: seller update ===");
-        Seller sellerUpdate = sellerDao.findById(1);
+        Seller sellerUpdate = sellerDao.findById(2);
         sellerUpdate.setName("Willian Estromboloffe");
         sellerDao.update(sellerUpdate);
         System.out.println("Atualizado no banco de dados!");
 
+        System.out.println();
+        System.out.println("=== TEST 6: seller delete ===");
+        sellerDao.deleteById(1);
+        System.out.println("Vendedor excluido do banco de dados!");
     }
 }
